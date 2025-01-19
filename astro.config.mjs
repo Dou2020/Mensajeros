@@ -8,7 +8,8 @@ import node from '@astrojs/node';
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind()],
-
+  site: 'https://Dou2020.github.io',
+  base: 'Mensajeros',
   adapter: node({
     mode: 'standalone'
   })
