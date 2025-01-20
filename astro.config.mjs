@@ -10,4 +10,8 @@ export default defineConfig({
   integrations: [tailwind()],
   site: 'https://Dou2020.github.io',
   base: 'Mensajeros',
+  adapter: node({
+    mode: 'standalone'
+  }),
+  outDir: './dist',  // Asegúrate de que el directorio sea correcto
 });
