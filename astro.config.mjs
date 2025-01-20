@@ -12,5 +12,6 @@ export default defineConfig({
   base: 'Mensajeros',
   adapter: node({
     mode: 'standalone'
-  })
+  }),
+  outDir: './dist',  // Asegúrate de que el directorio sea correcto
 });
