@@ -8,7 +8,15 @@
 		<title>Astro Basics</title>
 	</head>
 	<body>
-		<slot />
+		<div class="p-5 rounded-lg">
+			<div class="flex items-center justify-center h-40 mb-5 rounded bg-blue-200 dark:bg-gray-800">
+				<h1 class="flex items-center text-5xl font-extrabold dark:text-white">Actividades
+					<span class="bg-blue-100 text-blue-800 text-2xl font-semibold me-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-2">Mes</span>
+				</h1>
+			</div> 
+			<slot />
+		</div>
+
 		<script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 	</body>
 </html>
