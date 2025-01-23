@@ -11,11 +11,12 @@ export async function getData() {
         const extractedData = response.results.map((page) => {
             return {
                 //properties: page.properties,
-                nombre: page.properties.Nombre.title[0].plain_text,
-                descripcion: page.properties.Descripcion.rich_text[0].plain_text,
+                nombre: page.properties.Nombre.title[0]?.plain_text,
+                descripcion: page.properties.Descripcion.rich_text[0]?.plain_text,
+                lugar: page.properties.Lugar.rich_text[0]?.plain_text,
                 Estado: page.properties.Estado.status.name,
-                fecha: page.properties.Fecha.date.start,
-                file: page.properties.Archivo.files[0].file.url,
+                fecha: page.properties.Fecha.date?.start,
+                file: page.properties.Archivo.files[0]?.file.url,
             };
         });
 
