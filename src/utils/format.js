@@ -22,6 +22,7 @@ export async function getformat(dateString) {
         year: 'numeric', 
         month: 'long', 
         day: 'numeric',
+        zone: 'Central America Standard Time',
         //zone: 'UTC',
         hour: '2-digit',
         minute: '2-digit',
