@@ -1,5 +1,7 @@
 //import { compareAsc, format } from "date-fns";
 
+import { z } from "astro:content";
+
 export async function getformat(dateString) {
 
     //console.log(dateString);
@@ -20,6 +22,7 @@ export async function getformat(dateString) {
         year: 'numeric', 
         month: 'long', 
         day: 'numeric',
+        zone: 'UTC',
         hour: '2-digit',
         minute: '2-digit',
         hour12: true,
@@ -28,7 +31,7 @@ export async function getformat(dateString) {
 
     // Formatear fecha para Guatemala
     const formattedDate = new Intl.DateTimeFormat('es-GT', options).format(date);
-    //console.log(formattedDate);
+    console.log(formattedDate);
     return formattedDate;
 
 }
