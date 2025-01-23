@@ -4,7 +4,7 @@ import { z } from "astro:content";
 
 export async function getformat(dateString) {
 
-    //console.log(dateString);
+    console.log(dateString);
 
     //const dateParts = dateString.split('-'); // Divide la fecha en partes [2025, 01, 18]
 
@@ -18,15 +18,14 @@ export async function getformat(dateString) {
 
     // Opciones de formato
     const options = { 
-        weekday: 'long', 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric',
-        zone: 'Central America Standard Time',
-        //zone: 'UTC',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: true,
+        weekday: 'long',  // Formato de día de la semana
+        year: 'numeric', // Formato de año
+        month: 'long',  // Formato de mes
+        day: 'numeric', // Formato de fecha
+        timeZone: 'America/Guatemala', // Zona horaria de Guatemala (CST)
+        hour: '2-digit', // Formato de 24 horas
+        minute: '2-digit', // Minutos
+        hour12: true, // Formato de 12 horas
     };
 
 
