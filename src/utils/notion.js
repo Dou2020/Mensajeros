@@ -16,7 +16,7 @@ export async function getData() {
                 lugar: page.properties.Lugar.rich_text[0]?.plain_text,
                 Estado: page.properties.Estado.status.name,
                 fecha: page.properties.Fecha.date?.start,
-                file: page.properties.Archivo.files[0]?.file.url,
+                file: page.properties.Archivo.files[0]?.name,
             };
         });
 

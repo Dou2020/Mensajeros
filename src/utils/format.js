@@ -4,7 +4,7 @@ import { z } from "astro:content";
 
 export async function getformat(dateString) {
 
-    console.log(dateString);
+    //console.log(dateString);
 
     //const dateParts = dateString.split('-'); // Divide la fecha en partes [2025, 01, 18]
 
@@ -31,7 +31,7 @@ export async function getformat(dateString) {
 
     // Formatear fecha para Guatemala
     const formattedDate = new Intl.DateTimeFormat('es-GT', options).format(date);
-    console.log(formattedDate);
+    //console.log(formattedDate);
     return formattedDate;
 
 }
