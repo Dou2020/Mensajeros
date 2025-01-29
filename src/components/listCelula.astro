@@ -1,0 +1,25 @@
+---
+import { getData2 } from "../utils/notion";
+const notionList = await getData2();
+---
+    <!-- CARD of the info sociedad -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {notionList.map((item) => (
+    <div>
+      <div class="max-w-sm bg-blue-300 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto">
+          <a href="#">
+                  <img class="w-full h-60 object-cover rounded-t-lg" src={item.file} alt="" />
+          </a>
+          <div class="p-5">                   
+              <a href="#">
+                  <h6 class=" mt-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{item.nombre}</h6>
+              </a>
+              <p class="text-lg text-gray-600 dark:text-white">{item.dirige}</p>
+                <p class="mt-2 italic text-lg text-blue-900 dark:text-white">{item.predica}</p>
+              <p class="mb-3 mt-3 text-ms font-normal text-gray-800 dark:text-gray-400">{item.lugar}</p>
+          </div>
+      </div>
+    </div>
+      
+        ))}
+      </div>

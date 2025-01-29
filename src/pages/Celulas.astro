@@ -1,5 +1,7 @@
 ---
 import Navbar from '../components/navbar.astro';
+import Layout from '../layouts/Layout.astro';
+import ListCelula from '../components/listCelula.astro';
 ---
 
 <!DOCTYPE html>
@@ -11,5 +13,8 @@ import Navbar from '../components/navbar.astro';
 </head>
 <body>
     <Navbar />
+    <Layout>
+        <ListCelula />
+    </Layout>
 </body>
 </html>
