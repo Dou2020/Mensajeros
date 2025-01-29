@@ -3,6 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/navbar.astro';
 import NotionList from '../components/notionList.astro';
 import Footer from '../components/footer.astro';
+// Contenido a las paginas
+const title = "Actividades de Jóvenes";
+const subtitle = "Todos los sábados a las 7:00 pm";
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +16,7 @@ import Footer from '../components/footer.astro';
 </head>
 <body>
     <Navbar option="J" />
-    <Layout title="Actividades de Jóvenes">
+    <Layout title={title} subtitle={subtitle}>
         <NotionList />
     </Layout> 
     <Footer />
