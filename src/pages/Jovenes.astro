@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/navbar.astro';
 import NotionList from '../components/notionList.astro';
+import Footer from '../components/footer.astro';
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -11,9 +12,10 @@ import NotionList from '../components/notionList.astro';
     <title>Jóvenes</title>
 </head>
 <body>
-    <Navbar />
-    <Layout>
+    <Navbar option="J" />
+    <Layout title="Actividades de Jóvenes">
         <NotionList />
     </Layout> 
+    <Footer />
 </body>
 </html>

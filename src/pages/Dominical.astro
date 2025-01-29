@@ -2,6 +2,7 @@
 import Navbar from "../components/navbar.astro";
 import InicioList from "../components/inicioList.astro";
 import Footer from "../components/footer.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -11,8 +12,10 @@ import Footer from "../components/footer.astro";
     <title>Dominical</title>
 </head>
 <body>
-    <Navbar />
-    <InicioList />
+    <Navbar option="D" />
+    <Layout title="Dominical">
+        <InicioList />
+    </Layout>
     <Footer />
 </body>
 </html>
