@@ -1,5 +1,5 @@
 import { Client } from "@notionhq/client";
-//process.loadEnvFile();
+process.loadEnvFile();
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 
@@ -7,6 +7,12 @@ export async function getData() {
     try {
         const response = await notion.databases.query({
             database_id: process.env.NOTION_DATABASE_ID,
+            filter: {
+                property: "Estado",
+                status: {
+                    equals: "Próximo",
+                },
+            },
         });
         const extractedData = response.results.map((page) => {
             return {
@@ -32,6 +38,12 @@ export async function getData2() {
     try {
         const response = await notion.databases.query({
             database_id: process.env.NOTION_DATABASE_ID2,
+            filter: {
+                property: "Prioridad",
+                status: {
+                    equals: "Realizar",
+                },
+            },
         });
         const extractedData = response.results.map((page) => {
             return {
