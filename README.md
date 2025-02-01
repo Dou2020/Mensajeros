@@ -15,10 +15,12 @@ Inside of your Astro project, you'll see the following folders and files:
 │   ├── layouts/
 │   │   └── Layout.astro
 │   └── pages/
-|       └── index.astro
-|       └── Celulas.astro
-│       └── Jovenes.astro
-|       └── Dominical.astro
+|   |   └── index.astro
+|   |   └── Celulas.astro
+│   |   └── Jovenes.astro
+|   |   └── Dominical.astro
+|   └── components/
+|       └── footer.astro
 └── package.json
 ```
 
