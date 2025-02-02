@@ -52,6 +52,7 @@ export async function getData2() {
                 dirige: page.properties.Dirige?.rich_text[0]?.plain_text,
                 predica: page.properties.Predica?.rich_text[0]?.plain_text,
                 lugar: page.properties.Lugar.rich_text[0]?.plain_text,
+                descripcion: page.properties.Descripcion.rich_text[0]?.plain_text,
                 file: page.properties.Archivo.files[0]?.name,
             };
         });
