@@ -28,8 +28,8 @@ const notionList = await getData2();
               <a href="#">
                   <h6 class=" mt-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Día {item.nombre}</h6>
               </a>
-              <p class="text-lg text-gray-600 dark:text-white">Dirige: {item.dirige}</p>
-                <p class="mt-2 italic text-lg text-blue-900 dark:text-white">Predica: {item.predica}</p>
+              <p class="text-lg text-gray-600 dark:text-white"> { item.dirige === "n"? "":"Dirige: "+item.dirige }</p>
+                <p class="mt-2 italic text-lg text-blue-900 dark:text-white">{ item.predica === "n"? "":"Predica: "+item.predica }</p>
               <p class="mb-3 mt-3 text-ms font-normal text-gray-800 dark:text-gray-400">{item.descripcion}</p>
           </div>
       </div>
