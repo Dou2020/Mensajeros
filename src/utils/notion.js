@@ -44,6 +44,12 @@ export async function getData2() {
                     equals: "Realizar",
                 },
             },
+            sorts: [
+                {
+                    property: "Número",
+                    direction: "ascending",
+                },
+            ],
         });
         const extractedData = response.results.map((page) => {
             return {
