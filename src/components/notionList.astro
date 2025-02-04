@@ -9,7 +9,7 @@ const notionList = await getData();
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {notionList.map((item) => (
     <div>
-      <div class="max-w-sm bg-blue-300 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto">
+      <div class="max-w-sm bg-blue-300 border border-gray-200 rounded-lg shadow hover:bg-blue-100 dark:bg-gray-800 dark:border-gray-700 mx-auto">
           <a href="#">
                   <img class="w-full h-60 object-cover rounded-t-lg" src={item.file} alt="" />
           </a>
