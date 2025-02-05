@@ -9,5 +9,5 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   integrations: [tailwind()],
   site: 'https://Dou2020.github.io',
-  base: 'Mensajeros',
+  //base: 'Mensajeros',
 });
