@@ -8,7 +8,8 @@ import tailwind from '@astrojs/tailwind';
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind()],
+  output: 'static',
   //site: 'https://www.iglesiasinai.org',
-  site: 'https://Dou2020.github.io',
-  base: 'Mensajeros',
+  //site: 'https://Dou2020.github.io',
+  base: '/',
 });
