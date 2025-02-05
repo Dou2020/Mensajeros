@@ -1,18 +1,23 @@
 import { Client } from "@notionhq/client";
-//process.loadEnvFile();
+process.loadEnvFile();
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 
+// Database actividades de Jovenes
 export async function getData() {
     try {
         const response = await notion.databases.query({
             database_id: process.env.NOTION_DATABASE_ID,
-            filter: {
-                property: "Estado",
-                status: {
-                    equals: "Próximo",
+            sorts: [
+                {
+                    property: "Estado",
+                    direction: "ascending",
                 },
-            },
+                {
+                    property: "Fecha",
+                    direction: "descending",
+                },
+            ],
         });
         const extractedData = response.results.map((page) => {
             return {
@@ -34,6 +39,7 @@ export async function getData() {
         return [];
     }
 }
+
 export async function getData2() {
     try {
         const response = await notion.databases.query({
