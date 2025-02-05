@@ -39,7 +39,7 @@ export async function getData() {
         return [];
     }
 }
-
+// Database actividades de Adultos
 export async function getData2() {
     try {
         const response = await notion.databases.query({
