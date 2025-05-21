@@ -1,3 +1,8 @@
+---
+import CarruselMensajero from '../components/carruselMensajero.astro';
+import Carrusel from '../components/carruselMensajero.astro';
+---
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,9 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mensajeros del Maestro</title>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Dou2020/Mensajeros/refs/heads/main/public/icono_positivo.png" />
-  <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-    />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
@@ -27,71 +30,9 @@
       </a>
     </div>
   </header>
-
-<!-- Swiper CSS -->
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-/>
-
-<!-- Carrusel Swiper -->
-<section class="relative w-full overflow-hidden">
-  <div class="swiper h-[500px]">
-    <div class="swiper-wrapper">
-
-      <div class="swiper-slide">
-        <img src="https://source.unsplash.com/1600x900/?community,help" class="w-full h-full object-cover" />
-        <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-            <div class="text-center text-white max-w-xl px-4">
-              <h2 class="text-4xl md:text-5xl font-bold">Esperanza para las futuras generaciones</h2>
-              <p class="mt-4 text-lg">Juntos podemos construir un mejor mañana.</p>
-            </div>
-          </div>
-        </div>
-
-      <div class="swiper-slide">
-        <img src="https://source.unsplash.com/1600x900/?volunteer,hope" class="w-full h-full object-cover" />
-      </div>
-
-      <div class="swiper-slide">
-        <img src="https://source.unsplash.com/1600x900/?children,help" class="w-full h-full object-cover" />
-      </div>
-
-    </div>
-
-    <!-- Botones y paginación -->
-    <div class="swiper-pagination"></div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
-  </div>
-</section>
-
-<!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script type="module" client:load>
-
-import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs';
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const swiper = new Swiper(".swiper", {
-      loop: true,
-      autoplay: {
-        delay: 3000,
-        disableOnInteraction: false
-      },
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true
-      },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev"
-      }
-    });
-  });
-</script>
-
   
+  <!----- Importarndo el carrusel  --- -->
+  <CarruselMensajero/>
 
   <!-- Sección Informativa -->
   <section class="px-4 py-16 bg-gray-50 dark:bg-gray-800">

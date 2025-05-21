@@ -1,0 +1,62 @@
+---
+
+---
+
+<!-- Carrusel Swiper -->
+<section class="relative w-full overflow-hidden">
+    <div class="swiper h-[500px]">
+      <div class="swiper-wrapper">
+  
+        <div class="swiper-slide">
+          <img src="https://source.unsplash.com/1600x900/?community,help" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+              <div class="text-center text-white max-w-xl px-4">
+                <h2 class="text-4xl md:text-5xl font-bold">Actividades de Jóvenes</h2>
+                <p class="mt-4 text-lg mb-4">Conoce acerca de las actividades programadas por nuestra Sociedad de Jóvenes.</p>
+                <a href="/Jovenes" class="inline-block bg-blue-700 hover:bg-blue-800 text-white font-medium py-4 px-6 rounded-lg transition">
+                    Ver actividades
+                </a>
+              </div>
+            </div>
+          </div>
+  
+        <div class="swiper-slide">
+          <img src="https://source.unsplash.com/1600x900/?volunteer,hope" class="w-full h-full object-cover" />
+        </div>
+  
+        <div class="swiper-slide">
+          <img src="https://source.unsplash.com/1600x900/?children,help" class="w-full h-full object-cover" />
+        </div>
+  
+      </div>
+  
+      <!-- Botones y paginación -->
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </section>
+  
+  <!-- Swiper JS -->
+  <script type="module" client:load>
+  
+  import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs';
+  
+    document.addEventListener("DOMContentLoaded", function () {
+      const swiper = new Swiper(".swiper", {
+        loop: true,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        }
+      });
+    });
+  </script>
