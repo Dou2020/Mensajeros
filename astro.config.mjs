@@ -1,6 +1,5 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-
 import tailwind from '@astrojs/tailwind';
 
 //import node from '@astrojs/node';
@@ -9,7 +8,7 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   integrations: [tailwind()],
   output: 'static',
-  //site: 'https://www.iglesiasinai.org',
+  site: 'https://www.iglesiasinai.org',
   //site: 'https://Dou2020.github.io',
   base: '/',
 });
