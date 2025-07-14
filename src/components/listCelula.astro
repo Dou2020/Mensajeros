@@ -37,3 +37,21 @@ const notionList = await getData3();
       
         ))}
       </div>
+
+    <!-- Script de búsqueda -->
+    <script>
+      document.getElementById('searchForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const query = document.getElementById('default-search').value.toLowerCase();
+        const cards = document.querySelectorAll('.card-item');
+
+        cards.forEach(card => {
+          const nombre = card.dataset.nombre;
+          if (nombre.includes(query)) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    </script>
