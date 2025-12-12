@@ -1,23 +1,80 @@
 ---
-import Navbar from '../components/navbar.astro';
 import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/navbar.astro';
 import ListOracion from '../components/listOracion.astro';
-import Footer from '../components/footer.astro';
+import Footer from '../layouts/footer.astro';
+
+const pageMetadata = {
+  title: 'Semana de Oración - Iglesia Sinai Retalhuleu',
+  description: 'Participa en nuestra Semana de Oración, un tiempo especial de comunión con Dios mientras esperamos la segunda venida de Cristo.',
+  keywords: 'semana de oración, oración sinai, retiro espiritual, devocional, segunda venida',
+  author: 'Iglesia Sinai Retalhuleu'
+};
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Dou2020/Mensajeros/refs/heads/main/src/assets/Sinai.jpg"> 
-    <title>Semana de Oración</title>
-</head>
-<body>
-    <Navbar option="S" />
-    <Layout title="Semana de Oración" subtitle="Esperando la segunda venida de Cristo perseverando">
-        <ListOracion />
-    </Layout>
-    <Footer />
-</body>
-</html>
+<Layout 
+  title={pageMetadata.title}
+  description={pageMetadata.description}
+  keywords={pageMetadata.keywords}
+  author={pageMetadata.author}
+>
+  <Navbar option="S" />
+  
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-indigo-600/10 to-teal-600/10 dark:from-indigo-900/20 dark:to-teal-900/20"></div>
+    <div class="container mx-auto px-4 py-8 sm:py-12 relative z-10">
+      <div class="text-center mb-8 sm:mb-12 animate-fade-in">
+        <div class="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 mb-4 rounded-full bg-gradient-to-r from-indigo-600 to-teal-600 text-white shadow-lg">
+          <svg class="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">
+          Semana de 
+          <span class="bg-gradient-to-r from-indigo-600 to-teal-600 bg-clip-text text-transparent">
+            Oración
+          </span>
+        </h1>
+        <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          Esperando la segunda venida de Cristo perseverando en oración
+        </p>
+        <p class="text-base text-gray-500 dark:text-gray-400 mt-3">
+          Un tiempo especial de comunión y crecimiento espiritual
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Programación Section -->
+  <section class="container mx-auto px-4 pb-12">
+    <div class="mb-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-3">
+        Programación
+      </h2>
+      <p class="text-lg text-gray-600 dark:text-gray-400">
+        Temas y actividades de cada día
+      </p>
+    </div>
+    <ListOracion />
+  </section>
+  
+  <Footer />
+</Layout>
+
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out;
+  }
+</style>

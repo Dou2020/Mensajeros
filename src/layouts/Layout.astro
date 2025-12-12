@@ -1,43 +1,75 @@
 ---
-const {title, subtitle} = Astro.props;
----
-<!doctype html>
-<html lang="es-ES">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<div class="p-5 rounded-lg">
-			<div class="items-center justify-center h-35 rounded bg-blue-200 dark:bg-gray-800 mb-5">
-				<div class="flex items-center justify-center pt-5">
-					<h1 class="p-2 flex text-center items-center text-xl sm:text-2xl md:text-4xl xl:text-5xl font-extrabold dark:text-white">{title}
-						<span class="bg-blue-100 text-blue-800 text-xs sm:text-sm font-semibold me-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-2">
-							<svg class="w-[25px] sm:w-[30px] lg:w-[45px] h-[25px] sm:h-[30px] lg:h-[45px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
-								<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M7 11c.889-.086 1.416-.543 2.156-1.057a22.323 22.323 0 0 0 3.958-5.084 1.6 1.6 0 0 1 .582-.628 1.549 1.549 0 0 1 1.466-.087c.205.095.388.233.537.406a1.64 1.64 0 0 1 .384 1.279l-1.388 4.114M7 11H4v6.5A1.5 1.5 0 0 0 5.5 19v0A1.5 1.5 0 0 0 7 17.5V11Zm6.5-1h4.915c.286 0 .372.014.626.15.254.135.472.332.637.572a1.874 1.874 0 0 1 .215 1.673l-2.098 6.4C17.538 19.52 17.368 20 16.12 20c-2.303 0-4.79-.943-6.67-1.475"/>
-							</svg>												
-						</span>
-					</h1>
-				</div>
-				<div class="flex items-center justify-center pb-5">
-					<h3 class="flex ms-2 text-base sm:text-lx md:text-2xl  font-semibold text-gray-500 dark:text-gray-400">{subtitle}</h3>
-				</div>
-			</div>
-			<slot />
-		</div>
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  author?: string;
+}
 
-		<script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
-	</body>
+const { 
+  title = 'Iglesia Sinai Retalhuleu',
+  description = 'Sitio web oficial de Iglesia Presbiteriana Sinai - Retalhuleu/Guatemala',
+  keywords = 'iglesia sinai, sinai retalhuleu, iglesia guatemala',
+  author = 'Iglesia Sinai Retalhuleu'
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content={author} />
+    <meta name="generator" content={Astro.generator} />
+    
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Dou2020/Mensajeros/refs/heads/main/src/assets/Sinai.jpg" />
+    <title>{title}</title>
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Iglesia Sinai Retalhuleu",
+        "alternateName": ["iglesia sinai", "sinai retalhuleu", "sinai guatemala", "jovenes sinai"],
+        "url": "https://iglesiasinai.org/",
+        "description": "Sitio web oficial de Iglesia Presbiteriana Sinai - Retalhuleu/Guatemala",
+        "sameAs": [
+          "https://www.facebook.com/iglesiapresbiterianasinai.reu"
+        ]
+      }
+    </script>
+  </head>
+  
+  <body class="bg-gradient-to-br from-blue-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 min-h-screen">
+    <slot />
+    
+    <script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global>
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  
+  html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
 </style>

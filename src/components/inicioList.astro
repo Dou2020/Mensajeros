@@ -1,41 +1,103 @@
+---
+const ministerios = [
+  {
+    title: 'Sociedad de Jóvenes',
+    subtitle: 'Mensajeros del Maestro',
+    description: 'Reuniones de jóvenes apasionados por seguir a Jesús',
+    schedule: 'Sábados 7:00 PM',
+    link: '/Jovenes',
+    image: 'https://raw.githubusercontent.com/Dou2020/Mensajeros/refs/heads/main/src/assets/Perfil%20FB%202025.jpg',
+    gradient: 'from-orange-500 to-pink-500',
+    icon: 'users'
+  },
+  {
+    title: 'Reunión de Células',
+    subtitle: 'Lectura y Oración',
+    description: 'Reuniones de familias para crecer en comunión',
+    schedule: 'Lunes 7:00 PM',
+    link: '/Celulas',
+    image: 'https://raw.githubusercontent.com/Dou2020/Mensajeros/refs/heads/main/src/assets/Perfil%20FB%202025.jpg',
+    gradient: 'from-purple-500 to-blue-500',
+    icon: 'home'
+  },
+  {
+    title: 'Escuela Dominical',
+    subtitle: 'Enseñanza Bíblica',
+    description: 'Clases bíblicas para todas las edades',
+    schedule: 'Domingos 9:30 AM',
+    link: '/Dominical',
+    image: 'https://raw.githubusercontent.com/Dou2020/Mensajeros/refs/heads/main/src/assets/Perfil%20FB%202025.jpg',
+    gradient: 'from-yellow-500 to-orange-500',
+    icon: 'book'
+  }
+];
+---
 
-    <!-- CARD of the info sociedad -->
-<div class="p-5 rounded-lg ">
-    <div class="mt-5 flex items-center justify-center h-100 rounded-sm dark:bg-gray-800">
-        <div >
-            <a href="/Mensajeros/Jovenes" class="flex flex-col items-center bg-blue-300 border border-gray-200 rounded-lg shadow-sm md:flex-row md:max-w-xl hover:bg-blue-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                <img class="object-cover w-full rounded-t-lg h-0 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src="https://raw.githubusercontent.com/Dou2020/Mensajeros/refs/heads/main/src/assets/Perfil%20FB%202025.jpg" alt="">
-                <div class="flex flex-col justify-between p-4 leading-normal">
-                    <h5 class="text-center text-2xl md:text-3xl  font-bold tracking-tight text-gray-900 dark:text-white">Sociedad de Jóvenes</h5>
-                    <h5 class="text-center mb-2 text-lg md:text-xl font-bold tracking-tight text-blue-900 dark:text-white">Mensajeros del Maestro</h5>
-                    
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Reuniones de Jóvenes, apacionados por seguir a Jesús.</p>
-                </div>
-            </a>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+  {ministerios.map((ministerio) => (
+    <a 
+      href={ministerio.link}
+      class="group block bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2 border border-gray-200 dark:border-gray-700"
+    >
+      <!-- Imagen con overlay -->
+      <div class="relative h-48 overflow-hidden">
+        <img 
+          src={ministerio.image} 
+          alt={ministerio.title}
+          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          loading="lazy"
+        />
+        <div class={`absolute inset-0 bg-gradient-to-t ${ministerio.gradient} opacity-60 group-hover:opacity-70 transition-opacity`}></div>
+        
+        <!-- Ícono -->
+        <div class="absolute top-4 right-4 w-12 h-12 bg-white/90 dark:bg-gray-900/90 rounded-full flex items-center justify-center shadow-lg">
+          {ministerio.icon === 'users' && (
+            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          )}
+          {ministerio.icon === 'home' && (
+            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+            </svg>
+          )}
+          {ministerio.icon === 'book' && (
+            <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          )}
         </div>
-    </div>
-    <div class="mt-5 flex items-center justify-center h-100 rounded-sm dark:bg-gray-800">
-        <div >
-            <a href="/Mensajeros/Celulas" class="flex flex-col items-center bg-blue-200 border border-gray-200 rounded-lg shadow-sm md:flex-row md:max-w-xl hover:bg-blue-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                <img class="object-cover w-full rounded-t-lg h-0 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src="https://raw.githubusercontent.com/Dou2020/Mensajeros/refs/heads/main/src/assets/Perfil%20FB%202025.jpg" alt="">
-                <div class="flex flex-col justify-between p-4 leading-normal">
-                    <h5 class="text-center text-2xl md:text-3xl  font-bold tracking-tight text-gray-900 dark:text-white">Reunión de Células</h5>
-                    <h5 class="text-center mb-2 text-lg md:text-xl font-bold tracking-tight text-blue-900 dark:text-white">Lectura, Oración</h5>
-                    
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Reuniones de Familias.</p>
-                </div>
-            </a>
+      </div>
+      
+      <!-- Contenido -->
+      <div class="p-6">
+        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-1 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:${ministerio.gradient} transition-all">
+          {ministerio.title}
+        </h3>
+        <p class="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-3">
+          {ministerio.subtitle}
+        </p>
+        
+        <!-- Horario -->
+        <div class="flex items-center text-gray-600 dark:text-gray-300 mb-3">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <span class="text-sm font-medium">{ministerio.schedule}</span>
         </div>
-    </div>
-    <div class="mt-5 flex items-center justify-center h-100 rounded-sm bg-gray-50 dark:bg-gray-800">
-        <div >
-            <a href="/Mensajeros/Dominical" class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow-sm md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-                <img class="object-cover w-full rounded-t-lg h-100 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src="https://raw.githubusercontent.com/Dou2020/Mensajeros/refs/heads/main/src/assets/Perfil%20FB%202025.jpg" alt="">
-                <div class="flex flex-col justify-between p-4 leading-normal">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Escuela Dominical</h5>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"> </p>
-                </div>
-            </a>
+        
+        <p class="text-gray-700 dark:text-gray-400 text-sm mb-4">
+          {ministerio.description}
+        </p>
+        
+        <!-- Botón -->
+        <div class="flex items-center text-blue-600 dark:text-blue-400 font-semibold group-hover:translate-x-2 transition-transform">
+          <span>Conoce más</span>
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
         </div>
-    </div>
+      </div>
+    </a>
+  ))}
 </div>

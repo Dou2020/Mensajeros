@@ -1,22 +1,80 @@
 ---
-import Navbar from "../components/navbar.astro";
-import InicioList from "../components/inicioList.astro";
-import Footer from "../components/footer.astro";
-import Layout from "../layouts/Layout.astro";
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/navbar.astro';
+import InicioList from '../components/inicioList.astro';
+import Footer from '../layouts/footer.astro';
+
+const pageMetadata = {
+  title: 'Escuela Dominical - Iglesia Sinai Retalhuleu',
+  description: 'Participa en nuestra Escuela Dominical cada domingo a las 9:30 AM. Clases bíblicas para todas las edades con enseñanzas transformadoras.',
+  keywords: 'escuela dominical, clases biblicas, dominical sinai, estudio biblico, enseñanza cristiana',
+  author: 'Iglesia Sinai Retalhuleu'
+};
 ---
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Dou2020/Mensajeros/refs/heads/main/src/assets/Sinai.jpg"> 
-    <title>Dominical</title>
-</head>
-<body>
-    <Navbar option="D" />
-    <Layout title="Escuela Dominical" subtitle="Todos los domingos a las 9:30 am">
-        <InicioList />
-    </Layout>
-    <Footer />
-</body>
-</html>
+
+<Layout 
+  title={pageMetadata.title}
+  description={pageMetadata.description}
+  keywords={pageMetadata.keywords}
+  author={pageMetadata.author}
+>
+  <Navbar option="D" />
+  
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-yellow-600/10 to-orange-600/10 dark:from-yellow-900/20 dark:to-orange-900/20"></div>
+    <div class="container mx-auto px-4 py-8 sm:py-12 relative z-10">
+      <div class="text-center mb-8 sm:mb-12 animate-fade-in">
+        <div class="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 mb-4 rounded-full bg-gradient-to-r from-yellow-600 to-orange-600 text-white shadow-lg">
+          <svg class="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+          </svg>
+        </div>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">
+          Escuela 
+          <span class="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">
+            Dominical
+          </span>
+        </h1>
+        <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          Todos los domingos a las 9:30 AM
+        </p>
+        <p class="text-base text-gray-500 dark:text-gray-400 mt-2">
+          Clases bíblicas para todas las edades
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ministerios Section -->
+  <section class="container mx-auto px-4 pb-12">
+    <div class="mb-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-3">
+        Nuestros Ministerios
+      </h2>
+      <p class="text-lg text-gray-600 dark:text-gray-400">
+        Descubre las diferentes actividades que tenemos para ti
+      </p>
+    </div>
+    <InicioList />
+  </section>
+  
+  <Footer />
+</Layout>
+
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out;
+  }
+</style>

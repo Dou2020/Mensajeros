@@ -2,35 +2,72 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/navbar.astro';
 import NotionList from '../components/notionList.astro';
-import Footer from '../components/footer.astro';
+import Footer from '../layouts/footer.astro';
+
+const pageMetadata = {
+  title: 'Inicio - Iglesia Sinai Retalhuleu',
+  description: 'Sitio web oficial de Iglesia Presbiteriana Sinai - Retalhuleu, Guatemala. Conoce nuestros eventos, células y actividades.',
+  keywords: 'iglesia sinai, sinai retalhuleu, iglesia guatemala, jovenes sinai, iglesia presbiteriana',
+  author: 'Iglesia Sinai Retalhuleu'
+};
 ---
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Dou2020/Mensajeros/refs/heads/main/src/assets/Sinai.jpg"> 
-    <title>Inicio</title>
-    <script type="application/ld+json">
-        {
-          "@context" : "https://schema.org",
-          "@type" : "WebSite",
-          "name" : "Iglesia Sinai Retalhuleu",
-          "alternateName": ["iglesia sinai", "sinai retalhuleu", "sinai guatemala","jovenes sinai"],
-          "url" : "https://iglesiasinai.org/",
-          "description" : "Sitio web oficial de Iglesia Presbiteriana Sinai - Retalhuleu/Guatemala",
-          "sameAs": [
-                "https://www.facebook.com/iglesiapresbiterianasinai.reu"
-          ]
-        }
-    </script>
-</head>
-<body>
-    <Navbar option="I" />
-    <Layout title="Inicio" subtitle="Bienvenidos a la Iglesia">
-        <NotionList />
-    </Layout>    
-    <Footer />
-</body>
-</html>
+
+<Layout 
+  title={pageMetadata.title}
+  description={pageMetadata.description}
+  keywords={pageMetadata.keywords}
+  author={pageMetadata.author}
+>
+  <Navbar option="I" />
+  
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 dark:from-blue-900/20 dark:to-purple-900/20"></div>
+    <div class="container mx-auto px-4 py-8 sm:py-12 relative z-10">
+      <div class="text-center mb-8 sm:mb-12 animate-fade-in">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">
+          Bienvenidos a 
+          <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            Iglesia Sinai
+          </span>
+        </h1>
+        <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          Un lugar donde encontrarás comunidad, fe y esperanza
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Eventos Section -->
+  <section class="mt-8 container mx-auto px-4 pb-12">
+    <div class="mb-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-3">
+        Próximos Eventos
+      </h2>
+      <p class="text-lg text-gray-600 dark:text-gray-400">
+        Mantente informado de nuestras actividades
+      </p>
+    </div>
+    <NotionList />
+  </section>
+  
+  <Footer />
+</Layout>
+
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out;
+  }
+</style>
 
