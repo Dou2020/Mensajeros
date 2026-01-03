@@ -5,12 +5,12 @@ import { getformat } from "../utils/format";
 const notionList = await getData2();
 ---
 
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 auto-rows-fr">
   {notionList.map((item) => (
-    <article class="group">
-      <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-1">
+    <article class="group h-full">
+      <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-1 h-full flex flex-col">
         <!-- Imagen -->
-        <div class="relative overflow-hidden h-56">
+        <div class="relative overflow-hidden h-56 flex-shrink-0">
           <img 
             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
             src={item.file} 
@@ -21,9 +21,9 @@ const notionList = await getData2();
         </div>
         
         <!-- Contenido -->
-        <div class="p-6">
+        <div class="p-6 flex flex-col flex-grow">
           <!-- Tema -->
-          <h3 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4 line-clamp-2">
+          <h3 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4 line-clamp-2 min-h-[3.5rem]">
             {item.tema}
           </h3>
           
@@ -35,14 +35,14 @@ const notionList = await getData2();
             <time class="text-sm sm:text-base font-medium italic">{getformat(item.fecha)}</time>
           </div>
           
-          <div class="space-y-3">
+          <div class="space-y-3 flex-grow">
             <!-- Dirigente -->
             {item.dirige && item.dirige !== "n" && (
               <div class="flex items-start">
                 <svg class="w-5 h-5 text-teal-600 dark:text-teal-400 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                 </svg>
-                <div>
+                <div class="flex-grow">
                   <p class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">Dirige</p>
                   <p class="text-base font-semibold text-gray-900 dark:text-white">{item.dirige}</p>
                 </div>
@@ -55,7 +55,7 @@ const notionList = await getData2();
                 <svg class="w-5 h-5 text-purple-600 dark:text-purple-400 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                 </svg>
-                <div>
+                <div class="flex-grow">
                   <p class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">Predica</p>
                   <p class="text-base font-medium text-gray-900 dark:text-white italic">{item.predica}</p>
                 </div>
