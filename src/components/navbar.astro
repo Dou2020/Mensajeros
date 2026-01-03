@@ -36,29 +36,35 @@ const navItems = [
 
       <!-- Mobile menu button -->
       <button 
-        data-collapse-toggle="navbar-default" 
+        id="mobile-menu-button"
         type="button" 
-        class="inline-flex items-center justify-center p-2 w-10 h-10 text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-blue-600 transition-colors" 
+        class="inline-flex items-center justify-center p-2 w-10 h-10 text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-blue-600 transition-all duration-300" 
         aria-controls="navbar-default" 
         aria-expanded="false"
         aria-label="Abrir menú de navegación"
       >
-        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+        <svg id="menu-icon" class="w-6 h-6 transition-transform duration-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+        </svg>
+        <svg id="close-icon" class="w-6 h-6 hidden transition-transform duration-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
         </svg>
       </button>
 
-      <!-- Desktop menu -->
-      <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-        <ul class="flex flex-col md:flex-row md:items-center gap-1 md:gap-2 p-4 md:p-0 mt-4 md:mt-0 bg-gray-50 md:bg-transparent rounded-lg md:rounded-none border border-gray-200 md:border-0 dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
+      <!-- Overlay para móvil -->
+      <div id="mobile-overlay" class="fixed inset-0 bg-black/50 z-40 hidden md:hidden transition-opacity duration-300"></div>
+
+      <!-- Desktop y Mobile menu -->
+      <div class="hidden w-full md:block md:w-auto fixed md:relative top-16 md:top-0 left-0 right-0 md:left-auto md:right-auto z-40 md:z-auto" id="navbar-default">
+        <ul class="flex flex-col md:flex-row md:items-center gap-1 md:gap-2 p-4 md:p-0 mt-0 md:mt-0 bg-white md:bg-transparent rounded-b-lg md:rounded-none border-t md:border-t-0 border-gray-200 md:border-0 dark:bg-gray-900 md:dark:bg-transparent dark:border-gray-700 shadow-lg md:shadow-none max-h-[calc(100vh-4rem)] md:max-h-none overflow-y-auto md:overflow-visible">
           {navItems.map((item) => (
             <li>
               <a 
                 href={item.href}
                 class={
                   option === item.key
-                    ? "block px-4 py-2.5 md:py-2 text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-semibold shadow-md transition-all duration-300"
-                    : "block px-4 py-2.5 md:py-2 text-gray-700 rounded-lg hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:text-gray-300 dark:hover:bg-gray-700 font-medium transition-all duration-300 hover:shadow-sm"
+                    ? "block px-4 py-3 md:py-2 text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-semibold shadow-md transition-all duration-300 hover:scale-105"
+                    : "block px-4 py-3 md:py-2 text-gray-700 rounded-lg hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:text-gray-300 dark:hover:bg-gray-700 font-medium transition-all duration-300 hover:shadow-sm hover:scale-105"
                 }
                 aria-current={option === item.key ? "page" : undefined}
               >
@@ -71,4 +77,116 @@ const navItems = [
     </div>
   </div>
 </nav>
+
+<script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const navbarDefault = document.getElementById('navbar-default');
+  const mobileOverlay = document.getElementById('mobile-overlay');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+  const navLinks = navbarDefault?.querySelectorAll('a');
+
+  let isMenuOpen = false;
+
+  function toggleMenu() {
+    isMenuOpen = !isMenuOpen;
+    
+    if (isMenuOpen) {
+      // Abrir menú
+      navbarDefault?.classList.remove('hidden');
+      mobileOverlay?.classList.remove('hidden');
+      menuIcon?.classList.add('hidden');
+      closeIcon?.classList.remove('hidden');
+      mobileMenuButton?.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden'; // Prevenir scroll
+      
+      // Animación de entrada
+      setTimeout(() => {
+        navbarDefault?.classList.add('animate-slide-down');
+        mobileOverlay?.classList.add('opacity-100');
+      }, 10);
+    } else {
+      // Cerrar menú
+      navbarDefault?.classList.remove('animate-slide-down');
+      mobileOverlay?.classList.remove('opacity-100');
+      menuIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+      mobileMenuButton?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = ''; // Restaurar scroll
+      
+      setTimeout(() => {
+        navbarDefault?.classList.add('hidden');
+        mobileOverlay?.classList.add('hidden');
+      }, 300);
+    }
+  }
+
+  function closeMenu() {
+    if (isMenuOpen) {
+      toggleMenu();
+    }
+  }
+
+  // Toggle menu al hacer click en el botón
+  mobileMenuButton?.addEventListener('click', toggleMenu);
+
+  // Cerrar menú al hacer click en el overlay
+  mobileOverlay?.addEventListener('click', closeMenu);
+
+  // Cerrar menú al hacer click en un link
+  navLinks?.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 768) {
+        closeMenu();
+      }
+    });
+  });
+
+  // Cerrar menú con tecla Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isMenuOpen) {
+      closeMenu();
+    }
+  });
+
+  // Cerrar menú al cambiar tamaño de ventana a desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768 && isMenuOpen) {
+      closeMenu();
+    }
+  });
+</script>
+
+<style>
+  @keyframes slide-down {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-down {
+    animation: slide-down 0.3s ease-out forwards;
+  }
+
+  /* Mejoras de accesibilidad para navegación con teclado */
+  nav a:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+  }
+
+  /* Smooth transitions para overlay */
+  #mobile-overlay {
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+  }
+
+  #mobile-overlay.opacity-100 {
+    opacity: 1;
+  }
+</style>
   
