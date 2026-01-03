@@ -1,7 +1,7 @@
 {
-  "name": "proyect-astro2",
+  "name": "website-iglesia-sinai",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.2",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -9,10 +9,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/node": "^9.0.1",
+    "@astrojs/node": "^9.1.0",
     "@astrojs/tailwind": "^5.1.4",
     "@notionhq/client": "^2.2.15",
-    "astro": "^5.1.7",
+    "astro": "^5.1.10",
     "content-disposition": "^0.5.4",
     "date-fns": "^4.1.0",
     "flowbite": "^2.5.2",
