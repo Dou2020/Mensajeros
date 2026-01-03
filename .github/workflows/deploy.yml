@@ -4,8 +4,8 @@ on:
   # Trigger the workflow every time you push to the `main` branch
   # Using a different branch name? Replace `main` with your branch’s name
 
-  schedule:
-    - cron: '0 0 * * *'
+  #schedule:
+  #  - cron: '0 0 * * *'
   #  - cron: '0 12 * * *'
   #  - cron: '0 14 * * *'
   # - cron: '0 18 * * *'
