@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^12.6.12",
     "@astrojs/node": "^9.1.0",
     "@astrojs/tailwind": "^5.1.4",
     "@notionhq/client": "^2.2.15",

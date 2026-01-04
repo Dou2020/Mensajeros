@@ -174,7 +174,7 @@ export async function getInicioEvents(): Promise<InicioEvent[]> {
             sorts: [
                 {
                     property: "date",
-                    direction: "ascending",
+                    direction: "descending",
                 },
             ],
         });
