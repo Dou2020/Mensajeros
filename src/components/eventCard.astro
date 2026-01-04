@@ -1,0 +1,83 @@
+---
+interface Props {
+	image: string;
+	title: string;
+	date: string;
+	location: string;
+    category: string;
+}
+
+const { image, title, date, location, category } = Astro.props;
+
+// Mapeo de categorías a gradientes y colores
+const categoryStyles: Record<string, { gradient: string; color: string }> = {
+    'Jóvenes': { gradient: 'from-orange-500 to-pink-500', color: 'orange' },
+    'Células': { gradient: 'from-purple-500 to-blue-500', color: 'purple' },
+    'Dominical': { gradient: 'from-yellow-500 to-orange-500', color: 'yellow' },
+    'Oración': { gradient: 'from-indigo-500 to-teal-500', color: 'indigo' },
+    'default': { gradient: 'from-blue-500 to-purple-500', color: 'blue' }
+};
+
+const style = categoryStyles[category] || categoryStyles['default'];
+---
+
+<div class="group bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2 border border-gray-200 dark:border-gray-700 h-full flex flex-col">
+	<!-- Imagen con overlay -->
+	<div class="relative h-48 overflow-hidden flex-shrink-0">
+		<img 
+            src={image} 
+            alt={title} 
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            loading="lazy"
+        />
+        <div class={`absolute inset-0 bg-gradient-to-t ${style.gradient} opacity-60 group-hover:opacity-70 transition-opacity`}></div>
+        
+        <!-- Badge de categoría -->
+        <div class="absolute top-4 left-4">
+            <span class={`bg-white/90 dark:bg-gray-900/90 text-${style.color}-600 text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-lg`}>
+                {category}
+            </span>
+        </div>
+
+        <!-- Ícono de ubicación -->
+        <div class="absolute top-4 right-4 w-10 h-10 bg-white/90 dark:bg-gray-900/90 rounded-full flex items-center justify-center shadow-lg">
+            <svg class={`w-5 h-5 text-${style.color}-600`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+        </div>
+	</div>
+	
+	<!-- Contenido -->
+	<div class="p-6 flex flex-col flex-grow">
+        <!-- Fecha -->
+        <div class="flex items-center text-gray-600 dark:text-gray-300 mb-3">
+            <svg class="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            <span class="text-sm font-semibold">{date}</span>
+        </div>
+
+        <!-- Título -->
+		<h3 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2 min-h-[3.5rem] group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-blue-600 group-hover:to-purple-600 transition-all">
+            {title}
+        </h3>
+		
+        <!-- Ubicación -->
+		<p class="text-gray-600 dark:text-gray-400 text-sm flex items-center gap-2 mb-4 flex-grow">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <span class="line-clamp-1">{location}</span>
+        </p>
+
+        <!-- Flecha animada -->
+        <div class="flex items-center text-blue-600 dark:text-blue-400 font-semibold group-hover:translate-x-2 transition-transform">
+            <span>Ver detalles</span>
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+        </div>
+	</div>
+</div>

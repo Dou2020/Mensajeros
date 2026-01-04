@@ -1,103 +1,94 @@
 ---
-const ministerios = [
-  {
-    title: 'Sociedad de Jóvenes',
-    subtitle: 'Mensajeros del Maestro',
-    description: 'Reuniones de jóvenes apasionados por seguir a Jesús',
-    schedule: 'Sábados 7:00 PM',
-    link: '/Jovenes',
-    image: 'https://raw.githubusercontent.com/Dou2020/Mensajeros/refs/heads/main/src/assets/Perfil%20FB%202025.jpg',
-    gradient: 'from-orange-500 to-pink-500',
-    icon: 'users'
-  },
-  {
-    title: 'Reunión de Células',
-    subtitle: 'Lectura y Oración',
-    description: 'Reuniones de familias para crecer en comunión',
-    schedule: 'Lunes 7:00 PM',
-    link: '/Celulas',
-    image: 'https://raw.githubusercontent.com/Dou2020/Mensajeros/refs/heads/main/src/assets/Perfil%20FB%202025.jpg',
-    gradient: 'from-purple-500 to-blue-500',
-    icon: 'home'
-  },
-  {
-    title: 'Escuela Dominical',
-    subtitle: 'Enseñanza Bíblica',
-    description: 'Clases bíblicas para todas las edades',
-    schedule: 'Domingos 9:30 AM',
-    link: '/Dominical',
-    image: 'https://raw.githubusercontent.com/Dou2020/Mensajeros/refs/heads/main/src/assets/Perfil%20FB%202025.jpg',
-    gradient: 'from-yellow-500 to-orange-500',
-    icon: 'book'
-  }
-];
+import { getInicioEvents } from "../utils/notion";
+import { getformat } from "../utils/format";
+
+const eventos = await getInicioEvents();
 ---
 
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-  {ministerios.map((ministerio) => (
-    <a 
-      href={ministerio.link}
-      class="group block bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2 border border-gray-200 dark:border-gray-700"
-    >
-      <!-- Imagen con overlay -->
-      <div class="relative h-48 overflow-hidden">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+  {eventos.map((evento) => (
+    <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700">
+      <!-- Imagen -->
+      <div class="relative overflow-hidden">
         <img 
-          src={ministerio.image} 
-          alt={ministerio.title}
-          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          src={evento.image} 
+          alt={evento.title}
+          class="w-full h-56 object-cover transform group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
         />
-        <div class={`absolute inset-0 bg-gradient-to-t ${ministerio.gradient} opacity-60 group-hover:opacity-70 transition-opacity`}></div>
-        
-        <!-- Ícono -->
-        <div class="absolute top-4 right-4 w-12 h-12 bg-white/90 dark:bg-gray-900/90 rounded-full flex items-center justify-center shadow-lg">
-          {ministerio.icon === 'users' && (
-            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-          )}
-          {ministerio.icon === 'home' && (
-            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-            </svg>
-          )}
-          {ministerio.icon === 'book' && (
-            <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-            </svg>
-          )}
-        </div>
+        {evento.category && (
+          <div class="absolute top-4 left-4">
+            <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+              {evento.category}
+            </span>
+          </div>
+        )}
       </div>
       
       <!-- Contenido -->
       <div class="p-6">
-        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-1 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:${ministerio.gradient} transition-all">
-          {ministerio.title}
+        {evento.date && (
+          <p class="text-blue-600 dark:text-blue-400 font-semibold text-sm mb-2">
+            {getformat(evento.date)}
+          </p>
+        )}
+        
+        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+          {evento.title}
         </h3>
-        <p class="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-3">
-          {ministerio.subtitle}
-        </p>
         
-        <!-- Horario -->
-        <div class="flex items-center text-gray-600 dark:text-gray-300 mb-3">
-          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <span class="text-sm font-medium">{ministerio.schedule}</span>
-        </div>
+        {evento.preside && (
+          <div class="flex items-start gap-2 mb-2">
+            <svg class="w-4 h-4 text-teal-600 dark:text-teal-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+            </svg>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              <span class="font-semibold">Preside:</span> {evento.preside}
+            </p>
+          </div>
+        )}
         
-        <p class="text-gray-700 dark:text-gray-400 text-sm mb-4">
-          {ministerio.description}
-        </p>
+        {evento.predica && (
+          <div class="flex items-start gap-2 mb-3">
+            <svg class="w-4 h-4 text-purple-600 dark:text-purple-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              <span class="font-semibold">Predica:</span> {evento.predica}
+            </p>
+          </div>
+        )}
         
-        <!-- Botón -->
-        <div class="flex items-center text-blue-600 dark:text-blue-400 font-semibold group-hover:translate-x-2 transition-transform">
-          <span>Conoce más</span>
-          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-          </svg>
-        </div>
+        {evento.location && (
+          <p class="text-gray-500 dark:text-gray-400 text-sm flex items-center gap-2 mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            {evento.location}
+          </p>
+        )}
+        
+        {evento.description && (
+          <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
+            {evento.description}
+          </p>
+        )}
+        
+        <button class="mt-2 w-full bg-gray-900 dark:bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 dark:hover:bg-blue-700 transition-colors">
+          Ver detalles
+        </button>
       </div>
-    </a>
+    </div>
   ))}
 </div>
+
+{eventos.length === 0 && (
+  <div class="col-span-full text-center py-12">
+    <svg class="w-16 h-16 mx-auto text-gray-400 dark:text-gray-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+    </svg>
+    <p class="text-xl text-gray-500 dark:text-gray-400 mb-2">No hay eventos disponibles</p>
+    <p class="text-sm text-gray-400 dark:text-gray-500">Pronto compartiremos nuevas actividades</p>
+  </div>
+)}

@@ -32,6 +32,17 @@ interface ActividadCelula {
     file: string | undefined;
 }
 
+interface InicioEvent {
+    title: string | undefined;
+    date: string | undefined;
+    description: string | undefined;
+    image: string | undefined;
+    preside: string | undefined;
+    predica: string | undefined;
+    location: string | undefined;
+    category: string | undefined;
+}
+
 // Database actividades de Jovenes
 export async function getData(): Promise<ActividadJoven[]> {
     try {
@@ -68,6 +79,7 @@ export async function getData(): Promise<ActividadJoven[]> {
         return [];
     }
 }
+
 // Database actividades de Adultos
 export async function getData2(): Promise<ActividadAdulto[]> {
     try {
@@ -109,6 +121,8 @@ export async function getData2(): Promise<ActividadAdulto[]> {
     }
 
 }
+
+// Database actividades de Celulas
 export async function getData3(): Promise<ActividadCelula[]> {
     if (! import.meta.env.NOTION_DATABASE_ID3) {
         console.error("NOTION_DATABASE_ID3 is not defined in environment variables.");
@@ -145,4 +159,43 @@ export async function getData3(): Promise<ActividadCelula[]> {
         return [];
     }
 
+}
+
+// Database eventos de Inicio
+export async function getInicioEvents(): Promise<InicioEvent[]> {
+    if (!import.meta.env.NOTION_DATABASE_ID_INICIO) {
+        console.error("NOTION_DATABASE_ID_INICIO is not defined in environment variables.");
+        return [];
+    }
+
+    try {
+        const response = await notion.databases.query({
+            database_id: import.meta.env.NOTION_DATABASE_ID_INICIO!,
+            sorts: [
+                {
+                    property: "date",
+                    direction: "ascending",
+                },
+            ],
+        });
+        const extractedData = response.results.map((page: any) => {
+            return {
+                title: page.properties.title?.title[0]?.plain_text,
+                date: page.properties.date?.date?.start,
+                description: page.properties.description?.rich_text[0]?.plain_text,
+                image: page.properties.image?.files[0]?.file?.url,
+                preside: page.properties.preside?.rich_text[0]?.plain_text,
+                predica: page.properties.predica?.rich_text[0]?.plain_text,
+                location: page.properties.location?.rich_text[0]?.plain_text,
+                category: page.properties.category?.select?.name,
+            };
+        });
+
+        console.log("Inicio Events:", extractedData);
+        
+        return extractedData;
+    } catch (error) {
+        console.error("Error fetching inicio events:", error);
+        return [];
+    }
 }
