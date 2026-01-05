@@ -1,7 +1,7 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/navbar.astro';
-import Footer from '../layouts/footer.astro';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/navbar.astro';
+import Footer from '../../layouts/footer.astro';
 
 const pageMetadata = {
   title: 'Ministerios - Iglesia Sinai Retalhuleu',
@@ -60,20 +60,28 @@ const ministerios = [
     bgDark: 'dark:bg-indigo-900/20'
   },
   {
-    nombre: 'Diaconos',
-    descripcion: 'Equipo de apoyo logístico, ujieres y servicio durante las actividades de la iglesia.',
-    icono: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
-    color: 'from-teal-600 to-cyan-600',
+    nombre: 'Diáconos',
+    descripcion: 'Equipo de apoyo logístico y servicio durante las actividades de la iglesia.',
+    icono: 'M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z',
+    color: 'from-cyan-600 to-sky-600',
     bgLight: 'bg-teal-50',
     bgDark: 'dark:bg-teal-900/20'
   },
   {
-    nombre: 'Ministerio de Medios',
-    descripcion: 'Producción audiovisual, streaming y contenido multimedia para nuestros cultos.',
-    icono: 'M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z',
-    color: 'from-orange-600 to-red-600',
-    bgLight: 'bg-orange-50',
-    bgDark: 'dark:bg-orange-900/20'
+    nombre: 'Sociedad Femenil',
+    descripcion: 'Comunidad de mujeres que se apoyan mutuamente y crecen en su fe.',
+    icono: 'M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 20.682 4.318 12.682a4.5 4.5 0 010-6.364z',
+    color: 'from-pink-600 to-rose-500',
+    bgLight: 'bg-pink-50',
+    bgDark: 'dark:bg-pink-900/20'
+  },
+  {
+    nombre: 'Sociedad de Caballeros',
+    descripcion: 'Comunidad de hombres que se apoyan mutuamente y crecen en su fe.',
+    icono: 'M12 12c2.21 0 4-1.79 4-4V5l-4-3-4 3v3c0 2.21 1.79 4 4 4zm7 8a7 7 0 00-14 0',
+    color: 'from-sky-600 to-indigo-600',
+    bgLight: 'bg-sky-50',
+    bgDark: 'dark:bg-indigo-900/20'
   }
 ];
 ---
