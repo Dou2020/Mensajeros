@@ -10,10 +10,10 @@ on:
   #  - cron: '0 14 * * *'
   # - cron: '0 18 * * *'
 
-  push:
-    branches: [ main ]
+  #push:
+  #  branches: [ main ]
   # Allows you to run this workflow manually from the Actions tab on GitHub.
-  workflow_dispatch:
+  #workflow_dispatch:
 
 
 # Allow this job to clone the repo and create a page deployment
