@@ -1,0 +1,74 @@
+---
+import { getDataFamiliar, type ActividadFamiliar } from "../utils/notion";
+
+const formatDate = (date?: string | Date | number | null): string => {
+    if (!date) return "";
+    try {
+        const d = new Date(date as any);
+        return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+    } catch {
+        return String(date);
+    }
+};
+
+const actividades: ActividadFamiliar[] = await getDataFamiliar();
+---
+
+<div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {actividades.map((actividad) => (
+            <a 
+                href={`/Familiar/${actividad.id}`}
+                class="bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group block"
+            >
+                <div class="bg-gradient-to-r from-pink-500 to-rose-600 p-4">
+                    <h3 class="text-xl font-bold text-white line-clamp-2 group-hover:scale-105 transition-transform">
+                        {actividad.tema || "Sin tema"}
+                    </h3>
+                    {actividad.fecha && (
+                        <p class="text-sm text-pink-100 mt-2">
+                            {formatDate(actividad.fecha)}
+                        </p>
+                    )}
+                </div>
+                
+                <div class="p-6 space-y-4">
+                    {actividad.cita && (
+                        <div class="border-l-4 border-pink-500 pl-4 py-2 bg-pink-50 dark:bg-pink-900/20">
+                            <p class="text-sm font-semibold text-pink-900 dark:text-pink-300 mb-1">Cita Bíblica</p>
+                            <p class="text-sm text-gray-700 dark:text-gray-300 italic line-clamp-2">{actividad.cita}</p>
+                        </div>
+                    )}
+                    
+                    {actividad.historia && (
+                        <div class="space-y-1">
+                            <p class="text-sm font-semibold text-gray-900 dark:text-white">Historia</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-3">{actividad.historia}</p>
+                        </div>
+                    )}
+                    
+                    {actividad.aprendizaje && (
+                        <div class="space-y-1">
+                            <p class="text-sm font-semibold text-gray-900 dark:text-white">Aprendizaje</p>
+                            <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-3">{actividad.aprendizaje}</p>
+                        </div>
+                    )}
+                    
+                    <div class="pt-4 flex items-center gap-2 text-pink-600 dark:text-pink-400 font-semibold text-sm group-hover:gap-3 transition-all">
+                        Leer más 
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+        ))}
+    </div>
+    
+    {actividades.length === 0 && (
+        <div class="text-center py-12">
+            <p class="text-gray-500 dark:text-gray-400 text-lg">No hay actividades familiares disponibles</p>
+        </div>
+    )}
+</div>

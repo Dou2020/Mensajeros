@@ -32,7 +32,7 @@ interface ActividadCelula {
     file: string | undefined;
 }
 
-interface InicioEvent {
+export interface InicioEvent {
     title: string | undefined;
     date: string | undefined;
     description: string | undefined;
@@ -41,6 +41,58 @@ interface InicioEvent {
     predica: string | undefined;
     location: string | undefined;
     category: string | undefined;
+}
+
+export interface ActividadFamiliar {
+    id: string;
+    tema: string | undefined;
+    cita: string | undefined;
+    historia: string | undefined;
+    aprendizaje: string | undefined;
+    reflexion: string | undefined;
+    actividad: string | undefined;
+    aplicacion: string | undefined;
+    fecha: string | undefined;
+}
+
+// Database actividades de Familiar
+export async function getDataFamiliar(): Promise<ActividadFamiliar[]> {
+    if (!import.meta.env.NOTION_DATABASE_ID_FAMILIAR) {
+        console.error("NOTION_DATABASE_ID_FAMILIAR is not defined in environment variables.");
+        return [];
+    }
+
+    try {
+        const response = await notion.databases.query({
+            database_id: import.meta.env.NOTION_DATABASE_ID_FAMILIAR!,
+            sorts: [
+                {
+                    property: "fecha",
+                    direction: "descending",
+                },
+            ],
+        });
+        const extractedData = response.results.map((page: any) => {
+            return {
+                id: page.id,
+                tema: page.properties.tema?.title?.[0]?.plain_text,
+                cita: page.properties.cita?.rich_text?.[0]?.plain_text,
+                historia: page.properties.historia?.rich_text?.[0]?.plain_text,
+                aprendizaje: page.properties.aprendizaje?.rich_text?.[0]?.plain_text,
+                reflexion: page.properties.reflexion?.rich_text?.[0]?.plain_text,
+                actividad: page.properties.actividad?.rich_text?.[0]?.plain_text,
+                aplicacion: page.properties.aplicacion?.rich_text?.[0]?.plain_text,
+                fecha: page.properties.fecha?.date?.start,
+            };
+        });
+
+        console.log("Actividades Familiares:", extractedData);
+        
+        return extractedData;
+    } catch (error) {
+        console.error("Error fetching familiar activities:", error);
+        return [];
+    }
 }
 
 // Database actividades de Jovenes

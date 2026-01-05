@@ -1,0 +1,214 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/navbar.astro';
+import Footer from '../../layouts/footer.astro';
+import { getDataFamiliar, type ActividadFamiliar } from '../../utils/notion';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const actividades = await getDataFamiliar();
+  
+  return actividades.map((actividad) => ({
+    params: { id: actividad.id },
+    props: { actividad }
+  }));
+}
+
+console.log("Astro props:", Astro.props);
+
+const { actividad } = Astro.props as { actividad: ActividadFamiliar };
+
+// Redirect to 404 if actividad is not found
+if (!actividad) {
+  return Astro.redirect('/404');
+}
+
+const formatDate = (date?: string | Date | number | null): string => {
+    if (!date) return "";
+    try {
+        const d = new Date(date as any);
+        return d.toLocaleDateString('es-GT', { 
+          weekday: 'long',
+          year: 'numeric', 
+          month: 'long', 
+          day: 'numeric' 
+        });
+    } catch {
+        return String(date);
+    }
+};
+
+const pageMetadata = {
+  title: `${actividad.tema || 'Actividad Familiar'} - Iglesia Sinai Retalhuleu`,
+  description: actividad.historia?.substring(0, 150) || 'Culto Familiar - Iglesia Sinai Retalhuleu',
+  keywords: 'culto familiar, familia cristiana, actividades familiares, iglesia sinai',
+  author: 'Iglesia Sinai Retalhuleu'
+};
+---
+
+<Layout 
+  title={pageMetadata.title}
+  description={pageMetadata.description}
+  keywords={pageMetadata.keywords}
+  author={pageMetadata.author}
+>
+  <Navbar option="D" />
+  
+  <!-- Header Section -->
+  <section class="relative overflow-hidden bg-gradient-to-r from-pink-600/10 to-rose-600/10 dark:from-pink-900/20 dark:to-rose-900/20">
+    <div class="container mx-auto px-4 py-8 sm:py-12">
+      <div class="max-w-4xl mx-auto">
+        <!-- Back Button -->
+        <a 
+          href="/Familiar" 
+          class="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-400 transition-colors mb-6 group"
+        >
+          <svg class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          Volver a Culto Familiar
+        </a>
+
+        <!-- Title and Date -->
+        <div class="mb-8">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            {actividad.tema || "Sin tema"}
+          </h1>
+          {actividad.fecha && (
+            <div class="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+              <svg class="w-5 h-5 text-pink-600 dark:text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+              <time class="text-lg capitalize">{formatDate(actividad.fecha)}</time>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="container mx-auto px-4 py-12">
+    <div class="max-w-4xl mx-auto space-y-8">
+      
+      <!-- Cita Bíblica -->
+      {actividad.cita && (
+        <div class="bg-gradient-to-r from-pink-50 to-rose-50 dark:from-pink-900/20 dark:to-rose-900/20 rounded-2xl p-8 border-l-4 border-pink-600">
+          <div class="flex items-start gap-4">
+            <svg class="w-8 h-8 text-pink-600 dark:text-pink-400 flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+            </svg>
+            <div>
+              <h2 class="text-lg font-bold text-pink-900 dark:text-pink-300 mb-2">Cita Bíblica</h2>
+              <p class="text-xl italic text-gray-800 dark:text-gray-200 leading-relaxed">
+                "{actividad.cita}"
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <!-- Historia -->
+      {actividad.historia && (
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-md border border-gray-100 dark:border-gray-700">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center">
+              <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Historia</h2>
+          </div>
+          <p class="text-gray-700 dark:text-gray-300 text-lg leading-relaxed whitespace-pre-line">
+            {actividad.historia}
+          </p>
+        </div>
+      )}
+
+      <!-- Aprendizaje -->
+      {actividad.aprendizaje && (
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-md border border-gray-100 dark:border-gray-700">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center">
+              <svg class="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+              </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Aprendizaje</h2>
+          </div>
+          <p class="text-gray-700 dark:text-gray-300 text-lg leading-relaxed whitespace-pre-line">
+            {actividad.aprendizaje}
+          </p>
+        </div>
+      )}
+
+      <!-- Reflexión -->
+      {actividad.reflexion && (
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-md border border-gray-100 dark:border-gray-700">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-teal-100 dark:bg-teal-900/30 rounded-full flex items-center justify-center">
+              <svg class="w-6 h-6 text-teal-600 dark:text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+              </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Reflexión</h2>
+          </div>
+          <p class="text-gray-700 dark:text-gray-300 text-lg leading-relaxed whitespace-pre-line">
+            {actividad.reflexion}
+          </p>
+        </div>
+      )}
+
+      <!-- Actividad -->
+      {actividad.actividad && (
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-md border border-gray-100 dark:border-gray-700">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
+              <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Actividad</h2>
+          </div>
+          <p class="text-gray-700 dark:text-gray-300 text-lg leading-relaxed whitespace-pre-line">
+            {actividad.actividad}
+          </p>
+        </div>
+      )}
+
+      <!-- Aplicación -->
+      {actividad.aplicacion && (
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-md border border-gray-100 dark:border-gray-700">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center">
+              <svg class="w-6 h-6 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Aplicación</h2>
+          </div>
+          <p class="text-gray-700 dark:text-gray-300 text-lg leading-relaxed whitespace-pre-line">
+            {actividad.aplicacion}
+          </p>
+        </div>
+      )}
+
+      <!-- Call to Action -->
+      <div class="mt-12 bg-gradient-to-r from-pink-600 to-rose-600 rounded-2xl p-8 text-center text-white">
+        <h3 class="text-2xl font-bold mb-3">Únete a nuestro Culto Familiar</h3>
+        <p class="text-lg text-pink-100 mb-6">
+          Fortaleciendo los lazos familiares a través de la fe
+        </p>
+        <a 
+          href="/Familiar" 
+          class="inline-block bg-white text-pink-600 px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-colors shadow-lg"
+        >
+          Ver más actividades
+        </a>
+      </div>
+    </div>
+  </section>
+  
+  <Footer />
+</Layout>
