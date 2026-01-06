@@ -1,13 +1,13 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/navbar.astro';
-import Content from '../components/Inicio/content.astro';
-import Footer from '../layouts/footer.astro';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/navbar.astro';
+import InicioList from '../../components/inicioList.astro';
+import Footer from '../../layouts/footer.astro';
 
 const pageMetadata = {
-  title: 'Inicio - Iglesia Sinai Retalhuleu',
-  description: 'Sitio web oficial de Iglesia Presbiteriana Sinai - Retalhuleu, Guatemala. Conoce nuestros eventos, células y actividades.',
-  keywords: 'iglesia sinai, sinai retalhuleu, iglesia guatemala, jovenes sinai, iglesia presbiteriana',
+  title: 'Eventos - Iglesia Sinai Retalhuleu',
+  description: 'Próximos eventos y actividades de Iglesia Presbiteriana Sinai. Únete a nuestras celebraciones y encuentros.',
+  keywords: 'eventos sinai, actividades iglesia, eventos retalhuleu, calendario iglesia',
   author: 'Iglesia Sinai Retalhuleu'
 };
 ---
@@ -18,26 +18,28 @@ const pageMetadata = {
   keywords={pageMetadata.keywords}
   author={pageMetadata.author}
 >
-  <Navbar option="I" />
+  <Navbar option="E" />
   
   <!-- Hero Section -->
   <section class="relative overflow-hidden bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800">
     <div class="container mx-auto px-4 py-12 md:py-20">
       <div class="max-w-4xl mx-auto text-center">
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight animate-fade-in">
-          Bienvenidos a 
           <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Iglesia Sinai
+            Próximos Eventos
           </span>
         </h1>
         <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-          Un lugar donde encontrarás comunidad, fe y esperanza. Hay un espacio reservado para ti en cada una de nuestras actividades.
+          Únete a nuestras próximas actividades. Mantente informado de todo lo que está sucediendo en nuestra comunidad.
         </p>
       </div>
     </div>
   </section>
 
-  <Content />
+  <!-- Eventos Section -->
+  <section class="container mx-auto px-4 py-12 md:py-16">
+    <InicioList />
+  </section>
   
   <Footer />
 </Layout>
@@ -58,4 +60,3 @@ const pageMetadata = {
     animation: fade-in 0.8s ease-out;
   }
 </style>
-
