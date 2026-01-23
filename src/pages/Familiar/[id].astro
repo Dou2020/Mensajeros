@@ -4,20 +4,13 @@ import Navbar from '../../components/navbar.astro';
 import Footer from '../../layouts/footer.astro';
 import { getDataFamiliar, type ActividadFamiliar } from '../../utils/notion';
 
-export const prerender = true;
+export const prerender = false;
 
-export async function getStaticPaths() {
-  const actividades = await getDataFamiliar();
-  
-  return actividades.map((actividad) => ({
-    params: { id: actividad.id },
-    props: { actividad }
-  }));
-}
+const { id } = Astro.params;
+const actividades = await getDataFamiliar();
+const actividad = actividades.find(a => a.id === id);
 
 console.log("Astro props:", Astro.props);
-
-const { actividad } = Astro.props as { actividad: ActividadFamiliar };
 
 // Redirect to 404 if actividad is not found
 if (!actividad) {
