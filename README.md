@@ -21,6 +21,13 @@ npm install
 
 # Iniciar servidor de desarrollo
 npm run dev
+
+# Despliegue en cloudflare
+```bash
+npx wrangler pages deploy dist
+```
+npm run deploy
+```
 ```
 
 ## 🏗️ Estructura del Proyecto
@@ -186,5 +193,6 @@ Este proyecto está bajo la Licencia MIT - ver [LICENSE.md](LICENSE.md) para má
 - A todos los que contribuyen al proyecto
 
 ---
+
 
 **Desarrollado con ❤️ para la Gloria de Dios**

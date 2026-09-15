@@ -1,4 +1,11 @@
 ---
+import ProximosEventos from './proximosEventos.astro';
+
+// Ubicación de la iglesia (plus code G8P8+CMM, Retalhuleu)
+const UBICACION = { lat: 14.536062, lng: -91.683266 };
+const COORDS = `${UBICACION.lat},${UBICACION.lng}`;
+const mapaEmbed = `https://www.google.com/maps?q=${COORDS}&z=17&hl=es&output=embed`;
+const mapaDirecciones = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(COORDS)}`;
 ---
 
 <!-- About Section -->
@@ -91,6 +98,9 @@
     </div>
   </div>
 </section>
+
+<!-- Próximos Eventos -->
+<ProximosEventos />
 
 <!-- Ministerios Destacados -->
 <section class="container mx-auto px-4 py-12 md:py-16">
@@ -272,18 +282,33 @@
       </div>
       
     <!-- Mapa -->
-    <div class="h-full min-h-[400px] rounded-xl overflow-hidden shadow-lg">
-      <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3860.8!2d-91.684!3d14.536!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x858930b5c1f5f5f5%3A0x1234567890abcdef!2sG8P8%2BCMM%2C%201a%20Calle%2C%20Retalhuleu!5e0!3m2!1ses!2sgt!4v1234567890"
-        width="100%" 
-        height="100%" 
-        style="border:0;" 
-        allowfullscreen="" 
-        loading="lazy" 
-        referrerpolicy="no-referrer-when-downgrade"
-        class="w-full h-full"
-        title="Ubicación de Iglesia Sinai Retalhuleu"
-      ></iframe>
+    <div class="flex flex-col gap-4">
+      <div class="flex-1 min-h-[400px] rounded-xl overflow-hidden shadow-lg">
+        <iframe
+          src={mapaEmbed}
+          width="100%"
+          height="100%"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="w-full h-full"
+          title="Ubicación de Iglesia Sinai Retalhuleu"
+        ></iframe>
+      </div>
+
+      <a
+        href={mapaDirecciones}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-300"
+      >
+        <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        </svg>
+        Cómo llegar
+      </a>
     </div>
     </div>
   </div>

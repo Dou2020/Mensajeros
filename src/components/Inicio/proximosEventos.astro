@@ -1,0 +1,97 @@
+---
+import { getInicioEvents } from "../../utils/notion";
+import { getformat } from "../../utils/format";
+
+const eventos = await getInicioEvents();
+
+// getInicioEvents() ordena descendente y devuelve todo el histórico:
+// aquí se invierte a ascendente y se recortan los 3 más próximos.
+// El margen de 24h evita que un evento de hoy desaparezca por la diferencia
+// entre la fecha sin hora de Notion (UTC) y la hora local de Guatemala (UTC-6).
+const MARGEN_MS = 24 * 60 * 60 * 1000;
+const corte = Date.now() - MARGEN_MS;
+
+const proximos = eventos
+  .filter((e) => e.date && new Date(e.date).getTime() >= corte)
+  .sort((a, b) => new Date(a.date!).getTime() - new Date(b.date!).getTime())
+  .slice(0, 3);
+---
+
+{proximos.length > 0 && (
+  <section class="container mx-auto px-4 py-12 md:py-16">
+    <div>
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          Próximos Eventos
+        </h2>
+        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          Acompáñanos en nuestras próximas actividades
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+        {proximos.map((evento) => (
+          <article class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700">
+            {evento.image && (
+              <div class="relative overflow-hidden">
+                <img
+                  src={evento.image}
+                  alt={evento.title}
+                  class="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                {evento.category && (
+                  <div class="absolute top-4 left-4">
+                    <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                      {evento.category}
+                    </span>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div class="p-6">
+              {evento.date && (
+                <p class="text-blue-600 dark:text-blue-400 font-semibold text-sm mb-2">
+                  {getformat(evento.date)}
+                </p>
+              )}
+
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                {evento.title}
+              </h3>
+
+              {evento.location && (
+                <p class="text-gray-500 dark:text-gray-400 text-sm flex items-center gap-2 mb-3">
+                  <svg class="h-4 w-4 flex-shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  {evento.location}
+                </p>
+              )}
+
+              {evento.description && (
+                <p class="text-gray-600 dark:text-gray-400 text-sm line-clamp-2">
+                  {evento.description}
+                </p>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="text-center mt-10">
+        <a
+          href="/Eventos"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-300"
+        >
+          Ver todos los eventos
+          <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+)}
