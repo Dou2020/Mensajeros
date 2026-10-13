@@ -34,20 +34,24 @@ npm run deploy
 
 ```text
 /
+├── FILE/                                    # Originales PNG/JPG (solo local, en .gitignore)
 ├── public/
 │   ├── icono.png
 │   └── icono_positivo.png
 ├── src/
-│   ├── assets/
-│   │   ├── carrucel_mensajeros[1-10].jpg    # Imágenes del carrusel
-│   │   ├── celula_*.png                     # Logos de células
-│   │   ├── galery_mensajeros[1-12].jpg      # Galería de fotos
-│   │   ├── jueves.png, lunes.png, etc.     # Días de la semana
-│   │   ├── Sinai.jpg                        # Logo principal
-│   │   ├── Jovenes_Directiva/               # Iconos directiva jóvenes
-│   │   │   ├── pastor.png
-│   │   │   ├── presidente.png
-│   │   │   ├── secretaria.png
+│   ├── assets/                              # Solo imágenes .webp
+│   │   ├── General/
+│   │   │   ├── Sinai.webp                   # Logo principal
+│   │   │   └── perfil_mensajeros.webp       # Perfil de Mensajeros
+│   │   ├── Celulas/celula_*.webp            # Logos de células
+│   │   ├── SemanaOracion/                   # Días de la semana (lunes…viernes, vigilia)
+│   │   ├── Images_Jovenes/
+│   │   │   ├── carrucel_mensajeros*.webp    # Imágenes del carrusel
+│   │   │   └── galery_mensajeros*.webp      # Galería de fotos
+│   │   ├── Jovenes_Directiva/               # Fotos directiva jóvenes
+│   │   │   ├── pastor.webp
+│   │   │   ├── presidente.webp
+│   │   │   ├── secretaria.webp
 │   │   │   └── ...
 │   │   └── publicidad/                      # Material promocional
 │   ├── components/

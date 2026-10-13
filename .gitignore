@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# original (non-webp) images, kept locally only; src/assets holds the .webp versions
+FILE/

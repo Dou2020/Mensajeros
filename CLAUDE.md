@@ -67,6 +67,8 @@ The project is SSR by default, so most pages render per request without any dire
 
 Files in [src/assets/](src/assets/) are **not** imported through `astro:assets` anywhere. Images are referenced by absolute `https://raw.githubusercontent.com/Dou2020/Mensajeros/refs/heads/main/src/assets/…` URLs instead, and Notion-hosted images come back as S3 URLs. `astro.config.mjs` allowlists the relevant remote hosts under `image.domains`; adding an image from a new host requires adding it there. Keep using the existing URL style rather than mixing in local imports.
 
+`src/assets/` holds only `.webp` files, grouped by folder (`General/`, `Celulas/`, `SemanaOracion/`, `Images_Jovenes/`, `Jovenes_Directiva/`, `publicidad/`). The original PNG/JPG sources live in a root `FILE/` folder with the same layout; it is gitignored, so it exists only on the machine that converted them. Because images are served from GitHub `main`, a new or renamed asset only resolves after it is pushed — and the células, días, `Sinai` and `publicidad` images are linked from Notion (`Archivo` property), so their paths must be updated there too.
+
 ### Client-side JS
 
 Interactivity is plain inline `<script>` blocks inside the `.astro` file (mobile menu toggle in `navbar.astro`, live search filter in `listCelula.astro`, Swiper carousel in `carruselMensajero.astro` which `import`s Swiper as an ESM URL from jsDelivr). Flowbite is loaded from a CDN `<script is:inline>` in the layout, not bundled. No UI framework integration is installed, so the `client:load` written on the `<script>` tag in `carruselMensajero.astro` does nothing — client directives only apply to framework components.
